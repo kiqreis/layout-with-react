@@ -23,6 +23,18 @@ export function Post() {
           <p>Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
           <p><a href="#">My projects</a></p>
         </div>
+
+        <form className={styles.comments}>
+          <strong>Leave your feedback</strong>
+
+          <textarea
+            placeholder="Leave a comment"
+          />
+
+          <footer>
+            <button type="submit">Publish</button>
+          </footer>
+        </form>
       </article>
     </>
   )
