@@ -45,13 +45,13 @@
   gap: 1rem;
 }
 
-.author img {
+/* .author img {
   width: calc(3rem + 10px);
   height: calc(3rem + 10px);
   border-radius: 8px;
   border: 3px solid var(--gray-600);
   outline: 2px solid var(--green-500);
-}
+} */
 
 .authorInfo strong {
   display: block;

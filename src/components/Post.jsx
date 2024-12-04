@@ -1,5 +1,6 @@
 import styles from "./Post.module.css";
-import {Comment} from "./Comment.jsx";
+import { Comment } from "./Comment.jsx";
+import { Avatar } from "./Avatar.jsx";
 
 /* eslint-disable react/prop-types */
 export function Post() {
@@ -8,7 +9,12 @@ export function Post() {
       <article className={styles.post}>
         <header>
           <div className={styles.author}>
-            <img className={styles.avatar} src="https://github.com/kiqreis.png" alt="profile photo"/>
+            <Avatar
+              hasBorder
+              src="https://github.com/kiqreis.png"
+              alt="profile photo"
+            />
+
             <div className={styles.authorInfo}>
               <strong>Kaique Reis</strong>
               <span>Backend Developer</span>
@@ -23,7 +29,7 @@ export function Post() {
           <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Venenatis placerat netus; at facilisis imperdiet
             mattis.</p>
           <p>Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
-          <p><a href="#">My projects</a></p>
+          <p><a href="https://github.com/kiqreis?tab=repositories" target="_blank">My projects</a></p>
         </div>
 
         <form className={styles.comments}>
@@ -39,9 +45,9 @@ export function Post() {
         </form>
 
         <div className={styles.commentList}>
-          <Comment/>
-          <Comment/>
-          <Comment/>
+          <Comment />
+          <Comment />
+          <Comment />
         </div>
       </article>
     </>

@@ -1,5 +1,6 @@
 import { PencilSimpleLine } from '@phosphor-icons/react'
 import styles from './Sidebar.module.css'
+import { Avatar } from './Avatar'
 
 export function Sidebar() {
   return (
@@ -11,9 +12,14 @@ export function Sidebar() {
       />
 
       <div className={styles.profile}>
-        <img
+        {/* <img
           className={styles.avatar}
           src="https://github.com/kiqreis.png"
+          alt="profile photo"
+        /> */}
+        <Avatar
+          hasBorder
+          src="https://api.dicebear.com/9.x/avataaars/svg?seed=Eden&backgroundColor=c0aede"
           alt="profile photo"
         />
 
