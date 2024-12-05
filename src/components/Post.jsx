@@ -1,9 +1,17 @@
+import {format, formatDistanceToNow} from "date-fns";
+import {enUS} from "date-fns/locale";
 import styles from "./Post.module.css";
-import { Comment } from "./Comment.jsx";
-import { Avatar } from "./Avatar.jsx";
+import {Comment} from "./Comment.jsx";
+import {Avatar} from "./Avatar.jsx";
 
 /* eslint-disable react/prop-types */
-export function Post() {
+export function Post(props) {
+  const publishedDateFormatted = format(props.publishedAt, "LLLL d 'at' hh:mm aaa")
+  const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
+    locale: enUS,
+    addSuffix: true
+  })
+
   return (
     <>
       <article className={styles.post}>
@@ -11,25 +19,36 @@ export function Post() {
           <div className={styles.author}>
             <Avatar
               hasBorder
-              src="https://github.com/kiqreis.png"
+              src={props.author.avatarUrl}
               alt="profile photo"
             />
 
             <div className={styles.authorInfo}>
-              <strong>Kaique Reis</strong>
-              <span>Backend Developer</span>
+              <strong>{props.author.name}</strong>
+              <span>{props.author.role}</span>
             </div>
           </div>
 
-          <time title="November 28, 2024" dateTime="2024-11-28">Published 1 hour ago</time>
+          <time
+            title={publishedDateFormatted}
+            dateTime={props.publishedAt.toISOString()}
+          >
+            {publishedDateRelativeToNow}
+          </time>
         </header>
 
         <div className={styles.content}>
-          <p>Lorem ipsum odor amet, consectetuer adipiscing elit. 👍</p>
-          <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Venenatis placerat netus; at facilisis imperdiet
-            mattis.</p>
-          <p>Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
-          <p><a href="https://github.com/kiqreis?tab=repositories" target="_blank">My projects</a></p>
+          {props.content.map(line => {
+            if (line.type === "paragraph") {
+              return <p key={props.key}>{line.content}</p>
+            } else if (line.type === "link") {
+              return (<p key={props.key}>
+                <a href="https://github.com/kiqreis?tab=repositories" target="_blank">
+                  {line.content}
+                </a>
+              </p>)
+            }
+          })}
         </div>
 
         <form className={styles.comments}>
@@ -45,9 +64,9 @@ export function Post() {
         </form>
 
         <div className={styles.commentList}>
-          <Comment />
-          <Comment />
-          <Comment />
+          <Comment/>
+          <Comment/>
+          <Comment/>
         </div>
       </article>
     </>
