@@ -3,14 +3,33 @@ import {enUS} from "date-fns/locale";
 import styles from "./Post.module.css";
 import {Comment} from "./Comment.jsx";
 import {Avatar} from "./Avatar.jsx";
+import {useState} from "react";
 
 /* eslint-disable react/prop-types */
 export function Post(props) {
+  const [comments, setComments] = useState([
+    "Very nice, Devon! 👏🏽",
+  ])
+
+  const [newCommentText, setNewCommentText] = useState("")
+
   const publishedDateFormatted = format(props.publishedAt, "LLLL d 'at' hh:mm aaa")
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: enUS,
     addSuffix: true
   })
+
+  function handleCreateNewComment(event) {
+    event.preventDefault()
+
+    setComments([...comments, newCommentText])
+
+    setNewCommentText("")
+  }
+
+  function handleNewCommentChange(event) {
+    setNewCommentText(event.target.value)
+  }
 
   return (
     <>
@@ -51,11 +70,14 @@ export function Post(props) {
           })}
         </div>
 
-        <form className={styles.comments}>
+        <form onSubmit={handleCreateNewComment} className={styles.comments}>
           <strong>Leave your feedback</strong>
 
           <textarea
+            name="comment"
+            value={newCommentText}
             placeholder="Leave a comment"
+            onChange={handleNewCommentChange}
           />
 
           <footer>
@@ -64,9 +86,10 @@ export function Post(props) {
         </form>
 
         <div className={styles.commentList}>
-          <Comment/>
-          <Comment/>
-          <Comment/>
+          {comments.map(comment => {
+            // eslint-disable-next-line react/jsx-key
+            return (<Comment content={comment}/>)
+          })}
         </div>
       </article>
     </>
