@@ -1,9 +1,14 @@
-import {Avatar} from "./Avatar";
+import { Avatar } from "./Avatar";
 import styles from "./Comment.module.css";
-import {ThumbsUp, Trash} from "@phosphor-icons/react";
+import { ThumbsUp, Trash } from "@phosphor-icons/react";
 
 /* eslint-disable react/prop-types */
-export function Comment({content}) {
+export function Comment({ content, onDeleteComment }) {
+
+  function handleDeleteComment() {
+    onDeleteComment(content)
+  }
+
   return (
     <div className={styles.comment}>
       <Avatar
@@ -20,8 +25,8 @@ export function Comment({content}) {
               <time title="December 2, 2024 at 6:40pm" dateTime="2024-12-2">About 3 hours ago</time>
             </div>
 
-            <button title="Delete comment">
-              <Trash size={24}/>
+            <button title="Delete comment" onClick={handleDeleteComment}>
+              <Trash size={24} />
             </button>
           </header>
           <p>{content}</p>
@@ -29,7 +34,7 @@ export function Comment({content}) {
 
         <footer>
           <button>
-            <ThumbsUp/>
+            <ThumbsUp />
             Applaud <span>27</span>
           </button>
         </footer>

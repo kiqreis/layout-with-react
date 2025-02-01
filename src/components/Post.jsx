@@ -1,9 +1,9 @@
-import {format, formatDistanceToNow} from "date-fns";
-import {enUS} from "date-fns/locale";
+import { format, formatDistanceToNow } from "date-fns";
+import { enUS } from "date-fns/locale";
 import styles from "./Post.module.css";
-import {Comment} from "./Comment.jsx";
-import {Avatar} from "./Avatar.jsx";
-import {useState} from "react";
+import { Comment } from "./Comment.jsx";
+import { Avatar } from "./Avatar.jsx";
+import { useState } from "react";
 
 /* eslint-disable react/prop-types */
 export function Post(props) {
@@ -29,6 +29,14 @@ export function Post(props) {
 
   function handleNewCommentChange(event) {
     setNewCommentText(event.target.value)
+  }
+
+  function deleteComment(commentToDelete) {
+    const commentsWithoutDeletedOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+
+    setComments(commentsWithoutDeletedOne)
   }
 
   return (
@@ -86,9 +94,9 @@ export function Post(props) {
         </form>
 
         <div className={styles.commentList}>
-          {comments.map(comment => {
+          {comments.map((comment, index) => {
             // eslint-disable-next-line react/jsx-key
-            return (<Comment content={comment}/>)
+            return (<Comment key={index} content={comment} onDeleteComment={deleteComment} />)
           })}
         </div>
       </article>
