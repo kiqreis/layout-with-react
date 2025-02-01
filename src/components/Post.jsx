@@ -28,7 +28,13 @@ export function Post(props) {
   }
 
   function handleNewCommentChange(event) {
+    event.target.setCustomValidity("")
+
     setNewCommentText(event.target.value)
+  }
+
+  function handleInvalidComment() {
+    event.target.setCustomValidity("The field cannot be empty!")
   }
 
   function deleteComment(commentToDelete) {
@@ -83,13 +89,15 @@ export function Post(props) {
 
           <textarea
             name="comment"
-            value={newCommentText}
             placeholder="Leave a comment"
+            value={newCommentText}
             onChange={handleNewCommentChange}
+            onInvalid={handleInvalidComment}
+            required
           />
 
           <footer>
-            <button type="submit">Publish</button>
+            <button type="submit" disabled={newCommentText.length === 0}>Publish</button>
           </footer>
         </form>
 
