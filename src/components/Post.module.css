@@ -101,7 +101,6 @@
   color: var(--white);
   font-weight: bold;
   cursor: pointer;
-  /* transition: linear 0.1s; */
 }
 
 .comments button[type=submit]:not(:disabled):hover {

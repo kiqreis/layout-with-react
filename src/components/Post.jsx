@@ -9,7 +9,7 @@ import { useState } from "react";
 export function Post(props) {
   const [comments, setComments] = useState([
     "Very nice, Devon! 👏🏽",
-  ])
+  ]);
 
   const [newCommentText, setNewCommentText] = useState("")
 
@@ -20,29 +20,29 @@ export function Post(props) {
   })
 
   function handleCreateNewComment(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    setComments([...comments, newCommentText])
+    setComments([...comments, newCommentText]);
 
-    setNewCommentText("")
+    setNewCommentText("");
   }
 
   function handleNewCommentChange(event) {
-    event.target.setCustomValidity("")
+    event.target.setCustomValidity("");
 
-    setNewCommentText(event.target.value)
+    setNewCommentText(event.target.value);
   }
 
-  function handleInvalidComment() {
-    event.target.setCustomValidity("The field cannot be empty!")
+  function handleInvalidComment(event) {
+    event.target.setCustomValidity("The field cannot be empty!");
   }
 
   function deleteComment(commentToDelete) {
     const commentsWithoutDeletedOne = comments.filter(comment => {
-      return comment !== commentToDelete
+      return comment !== commentToDelete;
     })
 
-    setComments(commentsWithoutDeletedOne)
+    setComments(commentsWithoutDeletedOne);
   }
 
   return (
@@ -71,11 +71,11 @@ export function Post(props) {
         </header>
 
         <div className={styles.content}>
-          {props.content.map(line => {
+          {props.content.map((line, index) => {
             if (line.type === "paragraph") {
-              return <p key={props.key}>{line.content}</p>
+              return <p key={index}>{line.content}</p>
             } else if (line.type === "link") {
-              return (<p key={props.key}>
+              return (<p key={index}>
                 <a href="https://github.com/kiqreis?tab=repositories" target="_blank">
                   {line.content}
                 </a>
